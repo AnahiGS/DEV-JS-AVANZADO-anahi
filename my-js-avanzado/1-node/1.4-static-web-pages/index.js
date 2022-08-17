@@ -34,7 +34,7 @@ const server = http.createServer((request, response) =>{
             })
         }else{
             const status=404; 
-                    const mimeType=  { 'Content-type' : 'text/plain'}
+                    const mimeType=  { 'Content-type' : 'text/html'}
                     response.writeHead(status, mimeType);
                     response.write('<html><body>Not found </body></html>');
                     response.end();
