@@ -6,7 +6,9 @@ const connection = mysql.createConnection({
     database: config.database,
     user: config.username,
     password: config.password,
-    
+    ssl: {
+        rejectUnauthorized: false
+    }
 });
 
 const getConnection = () =>{
