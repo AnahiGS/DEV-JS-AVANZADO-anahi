@@ -4,10 +4,10 @@ import { methods as infoServicesController } from "./../controllers/infoServices
 const router = Router();
 
 /* A router that is used to create the routes for the API. */
-router.get("/", infoServicesController.getInfoServices); // GET http://localhost:3000/api-restful/infoServices/
-router.get("/:idInstitucion", infoServicesController.getById); // GET http://localhost:3000/api-restful/infoServices/:idInstitucion
-router.post("/", infoServicesController.addInfoService); // POST http://localhost:3000/api-restful/infoServices/
-router.put("/:idInstitucion", infoServicesController.updateInfoService); // PUT http://localhost:3000/api-restful/infoServices/:idInstitucion
-router.delete("/:idInstitucion", infoServicesController.deleteInfoService);// DELETE http://localhost:3000/api-restful/infoServices/:idInstitucion
+router.get("/", infoServicesController.getInfoServices); // GET http://localhost:8000/api-restful/infoServices/
+router.get("/:idInstitucion", infoServicesController.getById); // GET http://localhost:8000/api-restful/infoServices/:idInstitucion
+router.post("/", infoServicesController.addInfoService); // POST http://localhost:8000/api-restful/infoServices/
+router.put("/:idInstitucion", infoServicesController.updateInfoService); // PUT http://localhost:8000/api-restful/infoServices/:idInstitucion
+router.delete("/:idInstitucion", infoServicesController.deleteInfoService);// DELETE http://localhost:8000/api-restful/infoServices/:idInstitucion
 
 export default router;
