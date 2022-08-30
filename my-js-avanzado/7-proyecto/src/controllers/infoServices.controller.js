@@ -26,28 +26,39 @@ const getById = async (req, res) =>{
 const addInfoService = async (req, res) =>{
     try{
         const { idInstitucion, name, modalidad, estado, direccion, telefono, horario, webredesSociales, servicio } = req.body;
-        if (idInstitucion === undefined || name === undefined || modalidad === undefined || estado === undefined|| direccion === undefined|| telefono === undefined || horario=== undefined || webredesSociales=== undefined || servicio=== undefined){
-            res.status(400).json({message:"Bad Request. Please fill all field."})
+        if (idInstitucion === null ){
+          return res.status(400).json({message:"Bad Request. Please fill all field."})
+            
         }
         const connection = await getConnection();
         const result = await connection.query("INSERT INTO `InfoServices`(`idInstitucion`, `name`, `modalidad`, `estado`, `direccion`, `telefono`, `horario`, `webredesSociales`, `servicio` ) VALUES (?,?,?,?,?,?,?,?,?)", [idInstitucion, name, modalidad, estado, direccion, telefono, horario, webredesSociales, servicio]);
-        res.json(result)
+        return res.status(200).json(result)
     }catch (error){
         res.status(500);
         res.send(error.message)
     }
+    //     const newInfoService = req.body;
+//     try {
+//         // 6.1.2: Acceder a la capa service para tener una respuesta
+//         await getConnection.create(newInfoService);
+//         res.status(201).send();
+//     } catch(error) {
+//         // 6.1.3: Si hay un error al acceder al services respondemos un error generico
+//         res.status(500).send( { message: 'intenten más tarde' } );
+//     }
+// };
 }
 
 const updateInfoService = async (req, res) =>{
     try{
-        const {idInstitucion} = req.params;
+        const {idInstitucion } = req.params;
         const { name, modalidad, estado, direccion, telefono, horario, webredesSociales, servicio } = req.body;
-        if ( name === undefined || modalidad === undefined || estado === undefined|| direccion === undefined|| telefono === undefined || horario=== undefined || webredesSociales=== undefined || servicio=== undefined){
-            res.status(400).json({message:"Bad Request. Please fill all field."})
+        if ( name === null || modalidad === null  || estado === null || direccion === null || telefono === null  || horario=== null || webredesSociales=== null  || servicio=== null ){
+           return res.status(400).json({message:"Bad Request. Please fill all field."})
         }
         const connection = await getConnection();
         const result = await connection.query("UPDATE InfoServices SET `name`= ?,`modalidad`=?,`estado`=?,`direccion`=?, `telefono`=?, `horario`=?, `webredesSociales`=?, `servicio`=?, WHERE idInstitucion= ?", [idInstitucion, name, modalidad, estado, direccion, telefono, horario, webredesSociales, servicio]);
-        res.json(result)
+        return res.json(result)
     }catch (error){
         res.status(500);
         res.send(error.message)
