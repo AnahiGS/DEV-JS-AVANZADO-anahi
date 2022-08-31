@@ -51,14 +51,19 @@ const addInfoService = async (req, res) =>{
 
 const updateInfoService = async (req, res) =>{
     try{
-        const {idInstitucion } = req.params;
+        const {idInstitucion} = req.params;
         const { name, modalidad, estado, direccion, telefono, horario, webredesSociales, servicio } = req.body;
-        if ( name === null || modalidad === null  || estado === null || direccion === null || telefono === null  || horario=== null || webredesSociales=== null  || servicio=== null ){
+        // console.log(req.params);
+        // console.log(req.body);
+        if ( idInstitucion === null  ){
            return res.status(400).json({message:"Bad Request. Please fill all field."})
         }
         const connection = await getConnection();
-        const result = await connection.query("UPDATE InfoServices SET `name`= ?,`modalidad`=?,`estado`=?,`direccion`=?, `telefono`=?, `horario`=?, `webredesSociales`=?, `servicio`=?, WHERE idInstitucion= ?", [idInstitucion, name, modalidad, estado, direccion, telefono, horario, webredesSociales, servicio]);
+        console.log(connection);
+        const result = await connection.query("UPDATE InfoServices SET `name`= ?,`modalidad`=?,`estado`=?,`direccion`=?, `telefono`=?, `horario`=?, `webredesSociales`=?, `servicio`=? WHERE idInstitucion= ?", [ name, modalidad, estado, direccion, telefono, horario, webredesSociales, servicio, parseInt(idInstitucion)]);
+        console.log(result);
         return res.json(result)
+        
     }catch (error){
         res.status(500);
         res.send(error.message)
