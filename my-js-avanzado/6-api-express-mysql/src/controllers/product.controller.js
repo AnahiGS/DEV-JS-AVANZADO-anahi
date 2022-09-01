@@ -41,7 +41,9 @@ const addProduct = async (req, res) =>{
 const updateProduct = async (req, res) =>{
     try{
         const {sku} = req.params;
+        console.log(req.params);
         const { name_product, price, description_product, url_image } = req.body;
+        console.log (req.body);
         if (name_product === undefined || price === undefined ){
             res.status(400).json({message:"Bad Request. Please fill all field."})
         }
